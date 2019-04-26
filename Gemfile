@@ -25,7 +25,15 @@ gem 'sidekiq-scheduler'
 gem 'sidekiq-unique-jobs'
 gem 'sinatra', require: nil
 
+gem 'activerecord-import'
+
 gem 'flickr'
+
+gem 'devise'
+
+gem 'bootstrap', '~> 4.3.1'
+
+gem 'jquery-rails'
 
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
