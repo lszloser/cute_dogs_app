@@ -1,10 +1,9 @@
 class DogsController < ApplicationController
+before_action :authenticate_user!
 
     def index
         %% FlickrWorker.perform_async("BOB", "Welcome test") %
-        if Dog.all.any? 
-            @dog = Dog.find(rand(1..100) - 1)
-        end
+        @dogs = Dog.unvoted_by_user(current_user).sample(2) 
     end
 
 end

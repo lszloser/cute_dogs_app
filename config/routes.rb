@@ -5,12 +5,13 @@ require 'sidekiq-scheduler/web'
 Rails.application.routes.draw do
 
   devise_for :users
-  get 'home/index'
 
-  root to: "home#index"
-
-  resources :dogs, only: [:index]
+  resources :dogs, only: [:index, :vote] do
+    post '/vote' => 'votes#vote', as: :vote
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   mount Sidekiq::Web => '/sidekiq'
+
+  root "home#index"
 
 end
