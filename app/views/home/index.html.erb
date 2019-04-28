@@ -1,2 +1,9 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="container">
+  <div class="row">
+   <% unless @dogs.empty?  %>
+    <%= render @dogs %>
+  <% else %>
+    <%= render partial: 'dogs/no_dog' %>
+  <% end %>
+  </div>
+</div>
