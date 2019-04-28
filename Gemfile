@@ -25,7 +25,7 @@ gem 'sidekiq-scheduler'
 gem 'sidekiq-unique-jobs'
 gem 'sinatra', require: nil
 
-gem 'activerecord-import'
+gem 'turbolinks', '~> 5.2.0'
 
 gem 'flickr'
 
@@ -37,6 +37,11 @@ gem 'bootstrap', '~> 4.3.1'
 
 gem 'jquery-rails'
 
+gem 'coffee-rails'
+
+gem 'will_paginate', '~> 3.1', '>= 3.1.6'
+
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 
 
 group :development, :test do

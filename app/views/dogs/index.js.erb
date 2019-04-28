@@ -1,0 +1,17 @@
+
+<% if @dogs.present? %>
+  <% if @dogs.next_page.present?%>
+    <% if @dogs.next_page < 3 %>
+      $('#dogList').html('<%= j render @dogs %>');
+      $('#pages').html('<%= j will_paginate @dogs %>');
+    <% else %>
+      $('#dogList').append('<%= j render @dogs %>');
+    <% end %>
+  <% else %>
+    $('#dogList').append('<%= j render @dogs %>');
+    $('.pagination').remove();
+  <% end %>
+<% else %>
+  $('#dogList').html('No dogs');
+  $('.pagination').remove();
+<% end %>

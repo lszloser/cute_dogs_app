@@ -1,9 +1,26 @@
-<div class="container">
-  <div class="row">
-   <% unless @dogs.empty?  %>
+<h1>Top Dogs</h1>
+
+<div class="btn-group">
+  <%= button_to "Today", dogs_path, method: :get, params: { date_from: Time.now.beginning_of_day, date_to: Time.now.end_of_day }, data: { turbolinks: false }, remote: true, class: "btn btn-secondary" %>
+  <%= button_to "Current week", dogs_path, method: :get, params: { date_from: DateTime.now.beginning_of_week, date_to: DateTime.now.end_of_week }, data: { turbolinks: false }, remote: true, class: "btn btn-secondary" %>
+  <%= button_to "Current month", dogs_path, method: :get, params: { date_from: DateTime.now.beginning_of_month, date_to: DateTime.now.end_of_month }, data: { turbolinks: false }, remote: true, class: "btn btn-secondary" %>
+  <%= button_to "Total", dogs_path, method: :get, remote: true, class: "btn btn-secondary" %>
+</div>
+<table id="dogs" class="table infinite-table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">Image</th>
+      <th scope="col">Cuteness score</th>
+      <th scope="col">Uploaded at</th>
+    </tr>
+  </thead>
+
+  <tbody class="page" id="dogList">
     <%= render @dogs %>
-  <% else %>
-    <%= render partial: 'dogs/no_dog' %>
-  <% end %>
-  </div>
+  </tbody>
+</table>
+
+<br>
+<div id="pages" data-turbolinks="false">
+  <%= will_paginate @dogs %>
 </div>

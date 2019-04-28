@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20190426215617) do
     t.string "picture_id"
     t.string "secret"
     t.integer "cuteness", default: 0
+    t.index ["picture_id"], name: "index_dogs_on_picture_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,10 +1,7 @@
 class HomeController < ApplicationController
+before_action :authenticate_user!
 
   def index
-    if user_signed_in?
-      redirect_to dogs_path
-    else
-      redirect_to new_user_session_url
-    end
+    @dogs = Dog.unvoted_by_user(current_user).sample(2)
   end
 end

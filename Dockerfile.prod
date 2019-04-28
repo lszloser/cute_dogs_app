@@ -1,0 +1,18 @@
+FROM ruby:alpine
+
+RUN apk add --update build-base postgresql-dev tzdata nodejs
+RUN gem install rails -v '5.1.6'
+
+WORKDIR /app
+ADD Gemfile Gemfile.lock /app/
+RUN gem install bundler && bundle install --jobs 20 --retry 5 --without development test
+
+# Set Rails to run in production
+ENV RAILS_ENV production 
+ENV RACK_ENV production
+
+COPY . ./
+
+# Precompile Rails assets. We set a dummy secret key
+RUN bundle exec rake assets:precompile
+CMD ["puma"]

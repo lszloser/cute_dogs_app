@@ -1,13 +1,5 @@
-<div class="col-md-4">
-  <div class="card mb-4 box-shadow">
-    <%= image_tag dog.url, class: "card-img-top" %>
-    <div class="card-body">
-      <div class="d-flex justify-content-center align-items-center">
-        <%= button_to "Cute!", dog_vote_path(dog.id), method: :post, class: "btn btn-lg btn-outline-secondary" %>
-      </div>
-      <div class="d-flex align-items-right">
-        <small class="text-muted ">Cuteness: <%= dog.cuteness %></small>
-      </div>
-    </div>
-  </div>
-</div>
+<tr class="dog">
+  <td><%= image_tag dog.url, height: 64, width: 64 %></td>
+  <td><%= dog.cuteness %></td>
+  <td><%= dog.created_at %></td>
+</tr>
