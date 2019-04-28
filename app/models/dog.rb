@@ -1,4 +1,6 @@
 class Dog < ApplicationRecord
+  validates :secret, :picture_id, uniqueness: true, presence: true
+
   has_many :votes
   has_many :users, through: :votes
 

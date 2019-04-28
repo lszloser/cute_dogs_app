@@ -1,5 +1,9 @@
 <div class="container">
   <div class="row">
-   <%= render @dogs %>
+   <% unless @dogs.empty?  %>
+    <%= render @dogs %>
+  <% else %>
+    <%= render partial: 'dogs/no_dog' %>
+  <% end %>
   </div>
 </div>

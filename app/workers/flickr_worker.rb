@@ -3,13 +3,12 @@ require 'flickr'
 class FlickrWorker
   include Sidekiq::Worker
   def perform
-    dogs = []
     flickr = Flickr.new
-    list   = flickr.photos.search(tags: [:dog, :cute], tag_mode: :all, per_page: 100, page: 1)
-    list.each do |dog|
-      url = Flickr.url dog
-      dogs << Dog.new(url: url, picture_id: dog.id, secret: dog.secret, cuteness: 0)
+    list = flickr.photos.search(content_type: 1, safe_search: 1, tags: [:dog, :cute, :animal], tag_mode: :all, per_page: 300, page: 1)
+    list.reject { |dog| Dog.all.pluck(:picture_id).include? dog.id}.first(100).each do |obj|
+      url = Flickr.url obj
+      dog = Dog.new(url: url, picture_id: obj.id, secret: obj.secret, cuteness: 0)
+      dog.save
     end
-    Dog.import dogs, validate_uniqueness: true
   end
 end
