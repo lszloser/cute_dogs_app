@@ -1,9 +1,8 @@
 class DogsController < ApplicationController
-before_action :authenticate_user!
+before_action :authenticate_admin!
 
     def index
-        %% FlickrWorker.perform_async("BOB", "Welcome test") %
-        @dogs = Dog.unvoted_by_user(current_user).sample(2) 
+        @dogs = Dog.all
     end
 
 end
