@@ -4,5 +4,5 @@
  - default
 :schedule:
   flickr_worker:
-   cron: '30 2 */2 * *'  # Runs once per minute
+   cron: '0 0-23 * * *'  # Runs once per minute
    class: FlickrWorker

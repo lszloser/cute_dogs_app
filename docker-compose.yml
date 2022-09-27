@@ -6,27 +6,23 @@ services:
     volumes:
       - app-redis:/var/lib/redis/data
   sidekiq:
+    depends_on:
+      - 'db'
+      - 'redis'
     build: .
-    env_file:
-      - .env
     command: bundle exec sidekiq
     volumes:
-      - ./:/app
-    ports:
-      - 8081:8081
-    links:
-      - redis
-    depends_on:
-      - redis
-      - db
+      - '.:/project'
+    env_file:
+      - '.env'
   web:
     build: .
     volumes:
-      - ./:/app
-    working_dir: /app
+      - '.:/project'
+    working_dir: /project
     command: puma
     ports:
-      - 80:80
+      - 3000:3000
     depends_on:
       - db
       - sidekiq
@@ -39,6 +35,8 @@ services:
     image: postgres:10.3-alpine
     env_file:
       - .env
+    ports:
+        - "5432:5432"
 
 volumes:
   app-db:

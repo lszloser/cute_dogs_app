@@ -3,6 +3,7 @@
     <div class="col-12">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <h2 class="form-signin-heading text-center">Create account</h2>
+        <%= render 'layouts/error_messages', object: f.object %>
         <%= f.label :email, 'Email Address', class: 'sr-only' %>
         <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'Email Address' %>
 
